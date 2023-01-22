@@ -10,7 +10,7 @@ export class AppComponent {
   titleValue = ''
   
   constructor(private settingsService: SettingsService) {
-      console.log(settingsService.pdfSize)
+      // console.log(settingsService.pdfSize)
   }
 
   addArticle(title: HTMLInputElement, link: HTMLInputElement): boolean {

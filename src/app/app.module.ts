@@ -24,40 +24,40 @@ import { catchError, of, tap } from 'rxjs';
     HttpClientModule
   ],
   providers: [ 
-    {
-      provide: APP_INITIALIZER,
-      useFactory: () => {
-        const settingsService = inject(SettingsService);
-         const http = inject(HttpClient);
-        //https://github.com/profanis/codeShotsWithProfanis/blob/44/environmental_variables_app_initializer/src/app/app.module.ts
-        return () =>
-          new Promise((resolve) => {
-            // load settings for a deployed app
-            if (environment.production) {
-              http
-                .get('./config.json')
-                .pipe(
-                  tap((data: any) => {
-                    //settingsService.baseUrl = data.baseUrl;
-                    resolve(true);
-                  }),
-                  catchError((error) => {
-                    // settingsService.baseUrl = 'http://default.api';
-                    resolve(true);
-                    return of(null);
-                  })
-                )
-                .subscribe();
-            } else {
-              // load settings for a local app
-              const settings = require('../../config.json');
-              settingsService.pdfSize = settings.pdfSize;
-              resolve(true);
-            }
-          });
-      },
-      multi: true
-     }
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: () => {
+    //     const settingsService = inject(SettingsService);
+    //      const http = inject(HttpClient);
+    //     //https://github.com/profanis/codeShotsWithProfanis/blob/44/environmental_variables_app_initializer/src/app/app.module.ts
+    //     return () =>
+    //       new Promise((resolve) => {
+    //         // load settings for a deployed app
+    //         if (environment.production) {
+    //           http
+    //             .get('./config.json')
+    //             .pipe(
+    //               tap((data: any) => {
+    //                 //settingsService.baseUrl = data.baseUrl;
+    //                 resolve(true);
+    //               }),
+    //               catchError((error) => {
+    //                 // settingsService.baseUrl = 'http://default.api';
+    //                 resolve(true);
+    //                 return of(null);
+    //               })
+    //             )
+    //             .subscribe();
+    //         } else {
+    //           // load settings for a local app
+    //           const settings = require('../../config.json');
+    //           settingsService.pdfSize = settings.pdfSize;
+    //           resolve(true);
+    //         }
+    //       });
+    //   },
+    //   multi: true
+    //  }
   ],
   bootstrap: [AppComponent]
 })
